@@ -1,0 +1,27 @@
+# Entornos virtuales
+venv/
+env/
+.venv/
+.env
+.env.*
+
+# Archivos de Python
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+
+# Archivos y carpetas de Django
+db.sqlite3
+*.sqlite3
+media/
+staticfiles/
+*.log
+
+# Configuración local y de editores
+.vscode/
+
+# Migraciones que aún no quieres guardar (opcional)
+migrations/
+migrations/__init__.py
+
