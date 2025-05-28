@@ -120,6 +120,15 @@ def listar_alumnos(request, curso_id):
         'estudiantes': estudiantes
     })
 
+def listar_materiales(request, curso_id):
+    curso = get_object_or_404(Curso, id_curso=curso_id)
+    materiales = Material.objects.filter(id_curso=curso)
+
+    return render(request, 'profesor/listar_materiales.html', {
+        'curso': curso,
+        'materiales': materiales
+    })
+
 @role_required(['Administrador'])
 def asignar_profesor(request):
     if request.method == 'POST':
