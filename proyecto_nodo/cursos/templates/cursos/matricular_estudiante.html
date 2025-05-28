@@ -1,22 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
     <title>Matricular Estudiante</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Matricular Estudiante en un Curso</h1>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">Plataforma Nodo</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'admin_dashboard' %}">Panel administrador</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Inicio</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-    {% if form.errors %}
-        <p style="color: red;">Por favor corrige los errores:</p>
-    {% endif %}
+    <!-- FORMULARIO DE MATRICULACIÓN -->
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h2 class="card-title text-center mb-4">Matricular Estudiante en un Curso</h2>
+                        {% if form.errors %}
+                            <div class="alert alert-danger" role="alert">
+                                Por favor corrige los errores en el formulario.
+                            </div>
+                        {% endif %}
+                        <form method="post" autocomplete="off">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <div class="d-grid mt-3">
+                                <button type="submit" class="btn btn-success">Matricular</button>
+                            </div>
+                        </form>
+                        <div class="mt-3 text-center">
+                            <a href="{% url 'admin_dashboard' %}" class="text-decoration-none">&larr; Volver al panel de administrador</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Matricular</button>
-    </form>
-
-    <br>
-    <a href="{% url 'admin_dashboard' %}">Volver al panel de administrador</a>
+    <!-- Bootstrap JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
