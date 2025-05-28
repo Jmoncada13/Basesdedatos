@@ -1,6 +1,7 @@
 from rest_framework import viewsets
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from .decorators import role_required
 from .forms import MatriculaForm
 from django.contrib.auth.decorators import login_required
 from .forms import AsignarProfesorForm
@@ -81,6 +82,7 @@ def matricular_estudiante(request):
         form = MatriculaForm()
     return render(request, 'cursos/matricular_estudiante.html', {'form': form})
 
+@role_required(['Administrador'])
 def asignar_profesor(request):
     if request.method == 'POST':
         form = AsignarProfesorForm(request.POST)
@@ -98,14 +100,17 @@ def cursos_disponibles(request):
     cursos = Curso.objects.all()
     return render(request, 'cursos/cursos_disponibles.html', {'cursos': cursos})
 
+@role_required(['Administrador'])
 def admin_dashboard(request):
     return render(request, 'cursos/admin_dashboard.html')
 
 def home(request):
     return render(request, 'cursos/home.html')
 
+@role_required(['Profesor'])
 def profesor_dashboard(request):
     return HttpResponse("Bienvenido al panel de profesor")
 
+@role_required(['Estudiante'])
 def estudiante_dashboard(request):
     return HttpResponse("Bienvenido al panel de estudiante")
