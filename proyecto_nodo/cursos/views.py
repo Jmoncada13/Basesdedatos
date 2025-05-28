@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import MatriculaForm
 from django.contrib.auth.decorators import login_required
+from .forms import AsignarProfesorForm
 from .models import (
     Usuario, Curso, Interesa, Matricula, Material,
     Tarea, EntregaTarea, Foro, MensajeForo
@@ -79,6 +80,19 @@ def matricular_estudiante(request):
     else:
         form = MatriculaForm()
     return render(request, 'cursos/matricular_estudiante.html', {'form': form})
+
+def asignar_profesor(request):
+    if request.method == 'POST':
+        form = AsignarProfesorForm(request.POST)
+        if form.is_valid():
+            curso = form.cleaned_data['curso']
+            profesor = form.cleaned_data['profesor']
+            curso.id_nodo_profesor = profesor
+            curso.save()
+            return redirect('admin_dashboard')
+    else:
+        form = AsignarProfesorForm()
+    return render(request, 'cursos/asignar_profesor.html', {'form': form})
 
 def admin_dashboard(request):
     return render(request, 'cursos/admin_dashboard.html')

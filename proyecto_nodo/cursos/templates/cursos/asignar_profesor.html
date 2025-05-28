@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Asignar Profesor a Curso</title>
+</head>
+<body>
+    <h1>Asignar Profesor a un Curso</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Asignar</button>
+</form>
+<a href="{% url 'admin_dashboard' %}">← Volver al panel de administrador</a>
+</body>
+</html>
