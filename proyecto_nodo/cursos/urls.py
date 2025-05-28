@@ -11,5 +11,7 @@ urlpatterns = [
     path('asignar-profesor/', views.asignar_profesor, name='asignar_profesor'),
     path('cursos-disponibles/', views.cursos_disponibles, name='cursos_disponibles'),
     path('cursos-con-estudiantes/', views.cursos_y_estudiantes, name='cursos_y_estudiantes'),
+    path('profesor/cursos/', views.listar_cursos_profesor, name='listar_cursos_profesor'),
+    path('profesor/curso/<int:curso_id>/', views.listar_cursos_profesor, name='detalle_curso_profesor'),
     path('logout/', views.logout_view, name='logout'),
 ]

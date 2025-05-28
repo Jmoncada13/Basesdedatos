@@ -102,6 +102,11 @@ def cursos_y_estudiantes(request):
 
     return render(request, 'cursos/cursos_y_estudiantes.html', {'cursos_data': data})
 
+def listar_cursos_profesor(request):
+    profesor_id = request.session.get('usuario_id')  # o el nombre de la clave que uses
+    cursos = Curso.objects.filter(id_nodo_profesor_id=profesor_id)
+    return render(request, 'profesor/listar_cursos.html', {'cursos': cursos})
+
 @role_required(['Administrador'])
 def asignar_profesor(request):
     if request.method == 'POST':
@@ -129,7 +134,7 @@ def home(request):
 
 @role_required(['Profesor'])
 def profesor_dashboard(request):
-    return HttpResponse("Bienvenido al panel de profesor")
+    return render(request, 'profesor/profe_dashboard.html')
 
 @role_required(['Estudiante'])
 def estudiante_dashboard(request):

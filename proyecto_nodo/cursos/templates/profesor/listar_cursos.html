@@ -1,0 +1,11 @@
+<h2>Mis Cursos</h2>
+<ul>
+  {% for curso in cursos %}
+    <li>
+      <strong>{{ curso.nombre }}</strong> (ID: {{ curso.id_curso }})<br>
+      <a href="{% url 'detalle_curso_profesor' curso.id_curso %}">Ingresar</a>
+    </li>
+  {% empty %}
+    <li>No tienes cursos asignados.</li>
+  {% endfor %}
+</ul>
