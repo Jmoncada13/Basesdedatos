@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .decorators import role_required
 from .forms import MatriculaForm
@@ -107,6 +107,19 @@ def listar_cursos_profesor(request):
     cursos = Curso.objects.filter(id_nodo_profesor_id=profesor_id)
     return render(request, 'profesor/listar_cursos.html', {'cursos': cursos})
 
+def detalle_curso_profesor(request, curso_id):
+    curso = get_object_or_404(Curso, id_curso=curso_id)
+    return render(request, 'profesor/detalle_curso.html', {'curso': curso})
+
+def listar_alumnos(request, curso_id):
+    curso = get_object_or_404(Curso, id_curso=curso_id)
+    matriculas = Matricula.objects.filter(id_curso=curso)
+    estudiantes = [matricula.id_nodo_estudiante for matricula in matriculas]
+    return render(request, 'profesor/listar_alumnos.html', {
+        'curso': curso,
+        'estudiantes': estudiantes
+    })
+
 @role_required(['Administrador'])
 def asignar_profesor(request):
     if request.method == 'POST':
@@ -141,12 +154,8 @@ def estudiante_dashboard(request):
     return HttpResponse("Bienvenido al panel de estudiante")
 
 def logout_view(request):
-    # Elimina la sesión de Django
     request.session.flush()
-    # Elimina el usuario autenticado si usas auth de Django
     logout(request)
-    # Redirige al login o a la página de inicio
     response = redirect('login')
-    # Borra la cookie de CSRF
     response.delete_cookie('csrftoken')
     return response
