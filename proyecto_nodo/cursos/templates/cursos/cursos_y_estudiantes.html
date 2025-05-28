@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cursos y Estudiantes</title>
+</head>
+<body>
+    <h1>Listado de Cursos y Estudiantes Matriculados</h1>
+
+    {% for item in cursos_data %}
+        <h2>Curso: {{ item.curso.nombre }} (ID: {{ item.curso.id_curso }})</h2>
+
+        {% if item.estudiantes %}
+            <ul>
+                {% for estudiante in item.estudiantes %}
+                    <li>
+                        Estudiante: {{ estudiante.nombre_completo }} (ID: {{ estudiante.id_nodo }})
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No hay estudiantes matriculados en este curso.</p>
+        {% endif %}
+        <hr>
+    {% endfor %}
+
+    <a href="{% url 'admin_dashboard' %}">← Volver al panel de administrador</a>
+</body>
+</html>

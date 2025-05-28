@@ -83,6 +83,25 @@ def matricular_estudiante(request):
         form = MatriculaForm()
     return render(request, 'cursos/matricular_estudiante.html', {'form': form})
 
+def cursos_y_estudiantes(request):
+    cursos = Curso.objects.all()
+    data = []
+
+    for curso in cursos:
+        matriculas = Matricula.objects.filter(id_curso=curso)
+
+        estudiantes = Usuario.objects.filter(
+            id_nodo__in=matriculas.values('id_nodo_estudiante'),
+            rol='estudiante'
+        )
+
+        data.append({
+            'curso': curso,
+            'estudiantes': estudiantes
+        })
+
+    return render(request, 'cursos/cursos_y_estudiantes.html', {'cursos_data': data})
+
 @role_required(['Administrador'])
 def asignar_profesor(request):
     if request.method == 'POST':
