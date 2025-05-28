@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cursos Disponibles</title>
+</head>
+<body>
+    <h1>Cursos Disponibles</h1>
+    <ul>
+        {% for curso in cursos %}
+            <li>
+                <strong>{{ curso.nombre }}</strong> - Categoría: {{ curso.categoria }}<br>
+                Profesor: {{ curso.id_nodo_profesor.nombre_completo|default:"Por asignar" }}<br>
+                Precio: ${{ curso.precio }}<br>
+                Semestre: {{ curso.semestre }} / Año: {{ curso.anio }}
+            </li>
+            <hr>
+        {% empty %}
+            <li>No hay cursos disponibles.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'home' %}">← Volver al inicio</a>
+</body>
+</html>

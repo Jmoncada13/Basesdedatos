@@ -94,6 +94,10 @@ def asignar_profesor(request):
         form = AsignarProfesorForm()
     return render(request, 'cursos/asignar_profesor.html', {'form': form})
 
+def cursos_disponibles(request):
+    cursos = Curso.objects.all()
+    return render(request, 'cursos/cursos_disponibles.html', {'cursos': cursos})
+
 def admin_dashboard(request):
     return render(request, 'cursos/admin_dashboard.html')
 
