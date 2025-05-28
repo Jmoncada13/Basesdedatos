@@ -1,6 +1,8 @@
 from rest_framework import viewsets
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from .forms import MatriculaForm
+from django.contrib.auth.decorators import login_required
 from .models import (
     Usuario, Curso, Interesa, Matricula, Material,
     Tarea, EntregaTarea, Foro, MensajeForo
@@ -10,7 +12,6 @@ from .serializers import (
     MaterialSerializer, TareaSerializer, EntregaTareaSerializer,
     ForoSerializer, MensajeForoSerializer
 )
-
 
 class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = Usuario.objects.all()
@@ -64,13 +65,26 @@ def login_view(request):
                 else:
                     return redirect('estudiante_dashboard')
             else:
-                return render(request, 'login.html', {'error': 'Contraseña incorrecta'})
+                return render(request, 'cursos/login.html', {'error': 'Contraseña incorrecta'})
         except Usuario.DoesNotExist:
-            return render(request, 'login.html', {'error': 'Usuario no encontrado'})
-    return render(request, 'login.html')
+            return render(request, 'cursos/login.html', {'error': 'Usuario no encontrado'})
+    return render(request, 'cursos/login.html')
+
+def matricular_estudiante(request):
+    if request.method == 'POST':
+        form = MatriculaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('admin_dashboard') 
+    else:
+        form = MatriculaForm()
+    return render(request, 'cursos/matricular_estudiante.html', {'form': form})
 
 def admin_dashboard(request):
-    return HttpResponse("Bienvenido al panel de administrador")
+    return render(request, 'cursos/admin_dashboard.html')
+
+def home(request):
+    return render(request, 'cursos/home.html')
 
 def profesor_dashboard(request):
     return HttpResponse("Bienvenido al panel de profesor")

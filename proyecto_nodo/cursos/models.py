@@ -1,7 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 
-# Create your models here.
 
 class Usuario(models.Model):
     id_nodo = models.AutoField(primary_key=True)
@@ -23,9 +22,13 @@ class Usuario(models.Model):
     def clean(self):
         if self.rol != 'Profesor' and (self.area_princ or self.area_alt):
             raise ValidationError("Solo los profesores pueden tener área principal o alterna.")
+    
+    def __str__(self):
+        return f"{self.nombre_completo} ({self.id_nodo})"
 
 
-# ------------------ CURSO ------------------
+
+
 class Curso(models.Model):
     id_curso = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=100)
@@ -42,6 +45,9 @@ class Curso(models.Model):
     def clean(self):
         if not (2020 <= self.anio <= 2030):
             raise ValidationError("El año debe estar entre 2020 y 2030.")
+    
+    def __str__(self):
+        return f"{self.nombre} - {self.id_curso}"
 
 
 class Interesa(models.Model):
