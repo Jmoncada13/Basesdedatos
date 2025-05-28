@@ -14,6 +14,7 @@ from .serializers import (
     MaterialSerializer, TareaSerializer, EntregaTareaSerializer,
     ForoSerializer, MensajeForoSerializer
 )
+from django.contrib.auth import logout
 
 class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = Usuario.objects.all()
@@ -114,3 +115,14 @@ def profesor_dashboard(request):
 @role_required(['Estudiante'])
 def estudiante_dashboard(request):
     return HttpResponse("Bienvenido al panel de estudiante")
+
+def logout_view(request):
+    # Elimina la sesión de Django
+    request.session.flush()
+    # Elimina el usuario autenticado si usas auth de Django
+    logout(request)
+    # Redirige al login o a la página de inicio
+    response = redirect('login')
+    # Borra la cookie de CSRF
+    response.delete_cookie('csrftoken')
+    return response
