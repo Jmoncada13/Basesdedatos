@@ -33,7 +33,7 @@
             <ul class="list-group">
                 {% for material in materiales %}
                     <li class="list-group-item">
-                        {{ material.titulo }} 
+                        {{ material.titulo }}: {{material.descripcion}}
                     </li>
                 {% endfor %}
             </ul>
@@ -41,6 +41,7 @@
             <p class="text-muted">No hay materiales registrados para este curso.</p>
         {% endif %}
 
+        <a href="{% url 'crear_material' curso.id_curso %}" class="btn btn-primary mt-3">Subir nuevo material</a>
         <a href="{% url 'detalle_curso_profesor' curso.id_curso %}" class="btn btn-secondary mt-3">Volver al curso</a>
     </div>
 </body>

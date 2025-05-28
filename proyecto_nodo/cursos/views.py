@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .decorators import role_required
 from .forms import MatriculaForm
+from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required
 from .forms import AsignarProfesorForm
 from django.utils import timezone
@@ -130,6 +131,47 @@ def listar_materiales(request, curso_id):
         'materiales': materiales
     })
 
+def crear_material(request, curso_id):
+    curso = get_object_or_404(Curso, id_curso=curso_id)
+
+    if request.method == 'POST':
+        titulo = request.POST.get('titulo')
+        descripcion = request.POST.get('descripcion')
+        nombre_archivo = request.POST.get('nombre_archivo')
+
+        if titulo and nombre_archivo:
+            Material.objects.create(
+                titulo=titulo,
+                descripcion=descripcion,
+                nombre_archivo=nombre_archivo,
+                id_curso=curso
+            )
+            return redirect('listar_materiales', curso_id=curso.id_curso)
+
+    return render(request, 'profesor/crear_material.html', {'curso': curso})
+
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Curso, Foro
+
+def crear_foro(request, curso_id):
+    curso = get_object_or_404(Curso, id_curso=curso_id)
+
+    if request.method == 'POST':
+        nombre = request.POST.get('nombre')
+        descripcion = request.POST.get('descripcion')
+        fecha_cierre = request.POST.get('fecha_cierre')
+
+        if nombre:
+            Foro.objects.create(
+                id_curso=curso,
+                nombre=nombre,
+                descripcion=descripcion,
+                fecha_cierre=fecha_cierre if fecha_cierre else None
+            )
+            return redirect('ver_foros', curso_id=curso.id_curso)
+
+    return render(request, 'profesor/crear_foro.html', {'curso': curso})
+
 
 def ver_foros(request, curso_id):
     curso = get_object_or_404(Curso, id_curso=curso_id)
@@ -165,6 +207,36 @@ def ver_mensajes_foro(request, foro_id):
         'foro': foro,
         'mensajes': mensajes
     })
+
+def ver_tareas(request, curso_id):
+    curso = get_object_or_404(Curso, id_curso=curso_id)
+    tareas = Tarea.objects.filter(id_curso=curso).order_by('fecha_entrega')
+    return render(request, 'profesor/tareas.html', {
+        'curso': curso,
+        'tareas': tareas
+    })
+
+def crear_tarea(request, curso_id):
+    curso = get_object_or_404(Curso, id_curso=curso_id)
+
+    if request.method == 'POST':
+        nombre = request.POST.get('nombre')
+        descripcion = request.POST.get('descripcion')
+        fecha_entrega = request.POST.get('fecha_entrega')
+        archivo = request.POST.get('archivo')
+
+        tarea = Tarea(
+            nombre=nombre,
+            descripcion=descripcion,
+            fecha_entrega=fecha_entrega,
+            archivo=archivo,
+            id_curso=curso,
+            puntaje=0  # se inicializa, pero no se muestra ni edita
+        )
+        tarea.save()
+        return redirect('ver_tareas', curso_id=curso.id_curso)
+
+    return render(request, 'profesor/crear_tarea.html', {'curso': curso})
 
 
 @role_required(['Administrador'])

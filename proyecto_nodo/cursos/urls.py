@@ -17,5 +17,10 @@ urlpatterns = [
     path('profesor/curso/<int:curso_id>/materiales/', views.listar_materiales, name='listar_materiales'),
     path('profesor/curso/<int:curso_id>/foros/', views.ver_foros, name='ver_foros'),
     path('profesor/foro/<int:foro_id>/mensajes/', views.ver_mensajes_foro, name='ver_mensajes_foro'),
+    path('curso/<int:curso_id>/crear-foro/', views.crear_foro, name='crear_foro'),
+    path('profesor/curso/<int:curso_id>/tareas/', views.ver_tareas, name='ver_tareas'),
+    path('profesor/curso/<int:curso_id>/tareas/nueva/', views.crear_tarea, name='crear_tarea'),
+    path('profesor/curso/<int:curso_id>/materiales/nuevo/', views.crear_material, name='crear_material'),
+    path('profesor/curso/<int:curso_id>/materiales/nuevo/', views.crear_material, name='crear_material'),
     path('logout/', views.logout_view, name='logout'),
 ]
