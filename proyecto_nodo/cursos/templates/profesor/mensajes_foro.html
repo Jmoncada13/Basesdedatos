@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head> 
+    <meta charset="UTF-8">
+    <title>Mensajes del Foro: {{ foro.titulo }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-success">
+    <div class="container">
+        <a class="navbar-brand" href="/">Plataforma Nodo</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'profesor_dashboard' %}">Inicio Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-success text-white">
+            <h4 class="mb-0">Mensajes del Foro: {{ foro.titulo }}</h4>
+        </div>
+        <div class="card-body bg-white">
+
+            {% if mensajes %}
+                <ul class="list-group mb-4">
+                    {% for mensaje in mensajes %}
+                        <li class="list-group-item">
+                            <strong>{{ mensaje.id_nodo_usuario.nombre_completo }}:</strong> {{ mensaje.contenido }}<br>
+                            <small class="text-muted">{{ mensaje.fecha_envio }}</small>
+
+                            <ul class="mt-2 ps-4">
+                                {% for respuesta in mensaje.mensajeforo_set.all %}
+                                    <li>
+                                        <strong>{{ respuesta.id_nodo_usuario.nombre_completo }}:</strong> {{ respuesta.contenido }}<br>
+                                        <small class="text-muted">{{ respuesta.fecha_envio }}</small>
+                                    </li>
+                                {% empty %}
+                                    <li class="text-muted">Sin respuestas aún.</li>
+                                {% endfor %}
+                            </ul>
+
+                            <form method="post" class="mt-3">
+                                {% csrf_token %}
+                                <input type="hidden" name="respuesta_a" value="{{ mensaje.id_mensaje }}">
+                                <textarea name="contenido" rows="2" class="form-control mb-2" placeholder="Responder a este mensaje..."></textarea>
+                                <button type="submit" class="btn btn-outline-primary btn-sm">Responder</button>
+                            </form>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <div class="alert alert-info">
+                    Aún no hay mensajes en este foro.
+                </div>
+            {% endif %}
+
+            <div class="card mb-3">
+                <div class="card-header fw-semibold">Enviar nuevo mensaje</div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="respuesta_a" value="">
+                        <textarea name="contenido" rows="3" class="form-control mb-2" placeholder="Escribe un mensaje nuevo..."></textarea>
+                        <button type="submit" class="btn btn-success">Enviar mensaje</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="text-end">
+                <a href="{% url 'ver_foros' foro.id_curso.id_curso %}" class="btn btn-outline-secondary">Volver a foros</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

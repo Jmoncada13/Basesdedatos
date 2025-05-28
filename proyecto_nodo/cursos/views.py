@@ -5,6 +5,7 @@ from .decorators import role_required
 from .forms import MatriculaForm
 from django.contrib.auth.decorators import login_required
 from .forms import AsignarProfesorForm
+from django.utils import timezone
 from .models import (
     Usuario, Curso, Interesa, Matricula, Material,
     Tarea, EntregaTarea, Foro, MensajeForo
@@ -128,6 +129,43 @@ def listar_materiales(request, curso_id):
         'curso': curso,
         'materiales': materiales
     })
+
+
+def ver_foros(request, curso_id):
+    curso = get_object_or_404(Curso, id_curso=curso_id)
+    foros = Foro.objects.filter(id_curso=curso)
+    return render(request, 'profesor/foros.html', {
+        'curso': curso,
+        'foros': foros
+    })
+
+from .models import Usuario
+
+def ver_mensajes_foro(request, foro_id):
+    foro = get_object_or_404(Foro, id_foro=foro_id)
+    mensajes = MensajeForo.objects.filter(id_foro=foro, id_mensaje_padre=None).order_by('fecha_envio')
+
+    if request.method == 'POST':
+        contenido = request.POST.get('contenido')
+        respuesta_a = request.POST.get('respuesta_a')  # puede venir vacío
+        usuario_id = request.session.get('usuario_id')
+
+        if contenido and usuario_id:
+            usuario = get_object_or_404(Usuario, id_nodo=usuario_id)
+            MensajeForo.objects.create(
+                id_foro=foro,
+                id_nodo_usuario=usuario,
+                contenido=contenido,
+                fecha_envio=timezone.now(),
+                id_mensaje_padre_id=respuesta_a or None  # 👈 relación recursiva
+            )
+            return redirect('ver_mensajes_foro', foro_id=foro.id_foro)
+
+    return render(request, 'profesor/mensajes_foro.html', {
+        'foro': foro,
+        'mensajes': mensajes
+    })
+
 
 @role_required(['Administrador'])
 def asignar_profesor(request):

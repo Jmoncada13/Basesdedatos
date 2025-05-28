@@ -31,6 +31,7 @@
         <div class="list-group">
             <a href="{% url 'listar_alumnos' curso.id_curso %}" class="list-group-item list-group-item-action"> Listar Alumnos</a>
             <a href="{% url 'listar_materiales' curso.id_curso %}" class="list-group-item list-group-item-action">Ver Materiales</a>
+            <a href="{% url 'ver_foros' curso.id_curso %}" class="list-group-item list-group-item-action">Foros del Curso</a>
         </div>
         <a href="{% url 'listar_cursos_profesor' %}" class="btn btn-secondary mt-3">Volver a cursos</a>
     </div>
