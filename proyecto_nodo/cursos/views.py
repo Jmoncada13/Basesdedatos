@@ -105,7 +105,7 @@ def cursos_y_estudiantes(request):
     return render(request, 'cursos/cursos_y_estudiantes.html', {'cursos_data': data})
 
 def listar_cursos_profesor(request):
-    profesor_id = request.session.get('usuario_id')  # o el nombre de la clave que uses
+    profesor_id = request.session.get('usuario_id') 
     cursos = Curso.objects.filter(id_nodo_profesor_id=profesor_id)
     return render(request, 'profesor/listar_cursos.html', {'cursos': cursos})
 
@@ -150,8 +150,6 @@ def crear_material(request, curso_id):
 
     return render(request, 'profesor/crear_material.html', {'curso': curso})
 
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import Curso, Foro
 
 def crear_foro(request, curso_id):
     curso = get_object_or_404(Curso, id_curso=curso_id)
@@ -181,7 +179,6 @@ def ver_foros(request, curso_id):
         'foros': foros
     })
 
-from .models import Usuario
 
 def ver_mensajes_foro(request, foro_id):
     foro = get_object_or_404(Foro, id_foro=foro_id)
@@ -189,7 +186,7 @@ def ver_mensajes_foro(request, foro_id):
 
     if request.method == 'POST':
         contenido = request.POST.get('contenido')
-        respuesta_a = request.POST.get('respuesta_a')  # puede venir vacío
+        respuesta_a = request.POST.get('respuesta_a') 
         usuario_id = request.session.get('usuario_id')
 
         if contenido and usuario_id:
@@ -199,7 +196,7 @@ def ver_mensajes_foro(request, foro_id):
                 id_nodo_usuario=usuario,
                 contenido=contenido,
                 fecha_envio=timezone.now(),
-                id_mensaje_padre_id=respuesta_a or None  # 👈 relación recursiva
+                id_mensaje_padre_id=respuesta_a or None 
             )
             return redirect('ver_mensajes_foro', foro_id=foro.id_foro)
 
@@ -231,13 +228,12 @@ def crear_tarea(request, curso_id):
             fecha_entrega=fecha_entrega,
             archivo=archivo,
             id_curso=curso,
-            puntaje=0  # se inicializa, pero no se muestra ni edita
+            puntaje=0  
         )
         tarea.save()
         return redirect('ver_tareas', curso_id=curso.id_curso)
 
     return render(request, 'profesor/crear_tarea.html', {'curso': curso})
-
 
 @role_required(['Administrador'])
 def asignar_profesor(request):
