@@ -323,25 +323,33 @@ def ver_mensajes_foro_estudiante(request, foro_id):
 def tareas(request, curso_id):
     curso = get_object_or_404(Curso, id_curso=curso_id)
     tareas = Tarea.objects.filter(id_curso=curso)
-    return render(request, 'estudiantes/tareas.html', {'curso': curso, 'tareas': tareas})
-
+    estudiante_id = request.session.get('id_usuario') 
+    entregas_dict = {}
+    if estudiante_id:
+        entregas = EntregaTarea.objects.filter(id_nodo_estudiante_id=estudiante_id, id_tarea__in=tareas)
+        entregas_dict = {e.id_tarea.id_tarea: e.archivo_entregado for e in entregas}
+    return render(request, 'estudiantes/tareas.html', {
+        'curso': curso,
+        'tareas': tareas,
+        'entregas_dict': entregas_dict
+    })
 
 @role_required(['Estudiante'])
 def entregar_tarea(request, tarea_id):
     tarea = get_object_or_404(Tarea, id_tarea=tarea_id)
     if request.method == 'POST':
-        archivo = request.FILES.get('archivo_entregado')
-        estudiante_id = request.session.get('id_usuario')
-
+        archivo = request.POST.get('archivo_entregado')
+        estudiante_id = request.POST.get('id_nodo_estudiante') 
         if archivo and estudiante_id:
-            estudiante = get_object_or_404(Usuario, id_usuario=estudiante_id)
-
-            EntregaTarea.objects.create(
-                archivo_entregado=archivo,
+            entrega, created = EntregaTarea.objects.get_or_create(
                 id_tarea=tarea,
-                id_nodo_estudiante=estudiante
+                id_nodo_estudiante_id=estudiante_id,
+                defaults={'archivo_entregado': archivo}
             )
-            return redirect('ver_tareas_estudiante', curso_id=tarea.id_curso.id_curso)
-
+            if not created:
+                entrega.archivo_entregado = archivo
+                entrega.save()
+            return redirect('tareas', curso_id=tarea.id_curso.id_curso)
     return render(request, 'estudiantes/entregar_tarea.html', {'tarea': tarea})
+
 

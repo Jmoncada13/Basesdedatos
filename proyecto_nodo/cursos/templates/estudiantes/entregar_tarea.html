@@ -24,22 +24,17 @@
             <h4>Entrega de: {{ tarea.nombre }}</h4>
         </div>
         <div class="card-body bg-white">
-
-            {% if entrega %}
-                <div class="alert alert-info mb-4">
-                    Ya entregaste esta tarea: <strong>{{ entrega.archivo_entregado }}</strong>
-                </div>
-            {% endif %}
-
             <form method="post">
                 {% csrf_token %}
                 <div class="mb-3">
                     <label class="form-label">Nombre del archivo entregado</label>
-                    <input type="text" name="archivo_entregado" class="form-control" value="{{ entrega.archivo_entregado|default:'' }}" required>
+                    <input type="text" name="archivo_entregado" class="form-control" placeholder="Ej: tarea_mi_nombre.pdf" required>
                 </div>
-                <button type="submit" class="btn btn-success">
-                    {% if entrega %}Actualizar entrega{% else %}Entregar tarea{% endif %}
-                </button>
+                <div class="mb-3">
+                    <label class="form-label">Tu ID de nodo (estudiante)</label>
+                    <input type="number" name="id_nodo_estudiante" class="form-control" placeholder="Ej: 123" required>
+                </div>
+                <button type="submit" class="btn btn-success">Entregar tarea</button>
             </form>
 
             <div class="text-end mt-4">
