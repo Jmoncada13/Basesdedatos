@@ -2,11 +2,13 @@ from rest_framework import viewsets
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .decorators import role_required
+from django.db.models import Max
 from .forms import MatriculaForm
 from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required
 from .forms import AsignarProfesorForm
 from django.utils import timezone
+from django.contrib import messages
 from .models import (
     Usuario, Curso, Interesa, Matricula, Material,
     Tarea, EntregaTarea, Foro, MensajeForo
@@ -74,6 +76,37 @@ def login_view(request):
         except Usuario.DoesNotExist:
             return render(request, 'cursos/login.html', {'error': 'Usuario no encontrado'})
     return render(request, 'cursos/login.html')
+
+def registro_usuario(request):
+    if request.method == 'POST':
+        doc_identidad = request.POST.get('doc_identidad')
+        email = request.POST.get('email')
+        nombre_completo = request.POST.get('nombre_completo')
+        contraseña = request.POST.get('contraseña')  
+        telefono = request.POST.get('telefono')
+        genero = request.POST.get('genero')
+
+        if Usuario.objects.filter(email=email).exists():
+            messages.error(request, 'Ya existe un usuario con este correo.')
+        else:
+            ultimo_id = Usuario.objects.aggregate(Max('id_nodo'))['id_nodo__max'] or 0
+            nuevo_id = ultimo_id + 1
+
+            usuario = Usuario(
+                id_nodo=nuevo_id,
+                doc_identidad=doc_identidad,
+                email=email,
+                nombre_completo=nombre_completo,
+                contraseña=contraseña, 
+                telefono=telefono,
+                genero=genero,
+                rol='Estudiante',
+            )
+            usuario.save()
+            return redirect('login')
+
+    return render(request, 'cursos/registro.html')
+
 
 def matricular_estudiante(request):
     if request.method == 'POST':
