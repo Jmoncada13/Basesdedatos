@@ -206,6 +206,31 @@ def reporte_cursos_fechas(request):
     }
     return render(request, 'cursos/reporte_cursos_fechas.html', context)
 
+@role_required(['Administrador'])
+def reporte_usuarios_rol(request):
+    usuarios = []
+    rol_seleccionado = None
+    total_usuarios = 0
+    
+    # Obtener las opciones de roles del modelo Usuario
+    roles_disponibles = Usuario.ROL_CHOICES
+    
+    if request.method == 'POST':
+        rol_seleccionado = request.POST.get('rol')
+        
+        if rol_seleccionado:
+            # Filtrar usuarios por el rol seleccionado
+            usuarios = Usuario.objects.filter(rol=rol_seleccionado).order_by('nombre_completo')
+            total_usuarios = usuarios.count()
+    
+    context = {
+        'usuarios': usuarios,
+        'rol_seleccionado': rol_seleccionado,
+        'total_usuarios': total_usuarios,
+        'roles_disponibles': roles_disponibles
+    }
+    return render(request, 'cursos/reporte_usuarios_rol.html', context)
+
 # Vistas para Profesor
 @role_required(['Profesor'])
 def listar_cursos_profesor(request):
