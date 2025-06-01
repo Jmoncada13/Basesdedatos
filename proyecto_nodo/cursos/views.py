@@ -162,6 +162,13 @@ def cursos_disponibles(request):
     return render(request, 'cursos/cursos_disponibles.html', {'cursos': cursos})
 
 @role_required(['Administrador'])
+def estudiantes_curso_admin(request, curso_id):
+    curso = get_object_or_404(Curso, id_curso=curso_id)
+    matriculas = Matricula.objects.filter(id_curso=curso)
+    estudiantes = [matricula.id_nodo_estudiante for matricula in matriculas]
+    return render(request, 'cursos/estudiantes_curso_admin.html', {'curso': curso, 'estudiantes': estudiantes})
+
+@role_required(['Administrador'])
 def cursos_y_estudiantes(request):
     cursos = Curso.objects.all()
     data = []

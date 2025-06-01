@@ -44,6 +44,7 @@
                                             <th>Precio</th>
                                             <th>Semestre</th>
                                             <th>Año</th>
+                                            <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -55,6 +56,9 @@
                                                 <td>${{ curso.precio }}</td>
                                                 <td>{{ curso.semestre }}</td>
                                                 <td>{{ curso.anio }}</td>
+                                                <td>
+                                                    <a href="{% url 'estudiantes_curso_admin' curso.id_curso %}" class="btn btn-sm btn-outline-primary">Ver estudiantes</a>
+                                                </td>
                                             </tr>
                                         {% endfor %}
                                     </tbody>
