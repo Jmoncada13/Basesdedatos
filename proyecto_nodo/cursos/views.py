@@ -179,6 +179,33 @@ def cursos_y_estudiantes(request):
         data.append({'curso': curso, 'estudiantes': estudiantes})
     return render(request, 'cursos/cursos_y_estudiantes.html', {'cursos_data': data})
 
+@role_required(['Administrador'])
+def reporte_cursos_fechas(request):
+    cursos = []
+    fecha_inicio = None
+    fecha_fin = None
+    total_cursos = 0
+    
+    if request.method == 'POST':
+        fecha_inicio = request.POST.get('fecha_inicio')
+        fecha_fin = request.POST.get('fecha_fin')
+        
+        if fecha_inicio and fecha_fin:
+            # Filtrar cursos que empiecen en el rango de fechas seleccionado
+            cursos = Curso.objects.filter(
+                fecha_inicio__gte=fecha_inicio,
+                fecha_inicio__lte=fecha_fin
+            ).order_by('fecha_inicio')
+            total_cursos = cursos.count()
+    
+    context = {
+        'cursos': cursos,
+        'fecha_inicio': fecha_inicio,
+        'fecha_fin': fecha_fin,
+        'total_cursos': total_cursos
+    }
+    return render(request, 'cursos/reporte_cursos_fechas.html', context)
+
 # Vistas para Profesor
 @role_required(['Profesor'])
 def listar_cursos_profesor(request):

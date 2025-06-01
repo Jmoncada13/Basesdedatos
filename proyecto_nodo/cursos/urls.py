@@ -19,6 +19,7 @@ urlpatterns = [
     path('cursos-disponibles/', views.cursos_disponibles, name='cursos_disponibles'),
     path('cursos-disponibles/<int:curso_id>/estudiantes/', views.estudiantes_curso_admin, name='estudiantes_curso_admin'),
     path('cursos-con-estudiantes/', views.cursos_y_estudiantes, name='cursos_y_estudiantes'),
+    path('reporte-cursos-fechas/', views.reporte_cursos_fechas, name='reporte_cursos_fechas'),
 
     # Profesor
     path('profesor/cursos/', views.listar_cursos_profesor, name='listar_cursos_profesor'),
