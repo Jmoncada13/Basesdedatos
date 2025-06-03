@@ -10,6 +10,43 @@ Maria Alejandra Martinez mamartineg@eafit.edu.co
 # Diseño e Implementación de una base de datos para un Sistemas de Gestión de Cursos
 # 
 ## 1.1. Que aspectos cumplió o desarrolló de la actividad propuesta por el profesor (requerimientos funcionales y no funcionales)
+Login/logout, autenticar el usuario con su username y password, el cual seguramente estará en la tabla Usuarios.   
+
+Opciones Para un Administrador:   
+
+Matricular Usuarios a un curso.   
+
+Asignar un profesor a un curso.  
+
+Más todas las opciones como profesor y Alumno.  
+
+Opciones Para profesor y alumno. 
+
+Listar sus cursos 
+
+Ingresar a un curso y poder hacer: 
+
+Listar Alumnos 
+
+Listar Materiales  
+
+Foros (enviar mensajes, responder mensajes) 
+
+Tareas 
+
+Subir materiales (solo profesor, será simulado URLs ficticias) 
+
+Crear Foro (solo profesor) 
+
+Salir del Curso y regresar a Listar Cursos 
+
+Reportes – Solo Administradores 
+
+Listar todos los cursos por algun mecanismo de filtrado (todos o como codcurso, codprofesor, etc, o por rango de fechas, o por algun otro criterio que considere) 
+
+Ver la información de un curso: Detalles de un curso, su profesor y alumnos (no los materiales, tareas, foros) 
+
+Listar usuarios por algun mecanismo de filtrado (todos, o por role, id, etc) 
 
 ## 1.2. Que aspectos NO cumplió o desarrolló de la actividad propuesta por el profesor (requerimientos funcionales y no funcionales)
 
