@@ -1,4 +1,4 @@
-# Info de la materia: <ST0246> <Base-de-Datos>
+# Info de la materia: ST0246 Base-de-Datos
 #
 # Estudiante(s): 
 # Juan Sebastian Moncada, jsmoncadat@eafit.edu.co
