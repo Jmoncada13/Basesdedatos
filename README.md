@@ -1,4 +1,4 @@
-# info de la materia: <ST0246> <Base-de-Datos>
+# Info de la materia: <ST0246> <Base-de-Datos>
 #
 # Estudiante(s): 
 # Juan Sebastian Moncada, jsmoncadat@eafit.edu.co
@@ -8,7 +8,7 @@
 
 # Diseño e Implementación de una base de datos para un Sistema de Gestión de Cursos (Nodo LMS)
 
-<Este proyecto consiste en el diseño, modelado y desarrollo de una base de datos relacional para una plataforma de gestión de cursos en línea tipo LMS, llamada Nodo. La solución incluye desde el modelo entidad-relación hasta una aplicación web funcional desarrollada con Django y MySQL.>
+Este proyecto consiste en el diseño, modelado y desarrollo de una base de datos relacional para una plataforma de gestión de cursos en línea tipo LMS, llamada Nodo. La solución incluye desde el modelo entidad-relación hasta una aplicación web funcional desarrollada con Django y MySQL.
 
 ## 1. ¿Qué aspectos se cumplieron o desarrollaron de la actividad propuesta por el profesor?
 
@@ -36,15 +36,13 @@
   - Crear foros.
 - Salir de un curso y regresar al listado general.
 - **Funciones exclusivas del estudiante:**
- - Entregar tareas
+  - Entregar tareas
 
 ---
 
 ## 2. ¿Qué aspectos no se cumplieron?
 
-- No se implementó la funcionalidad de envío de notificaciones al correo.
-- No se gestionaron archivos reales (se simulan nombres).
-- No se desplegó la aplicación en un servidor remoto o en AWS.
+
 
 ---
 
