@@ -4,7 +4,8 @@
 Juan Sebastián Moncada jsmoncadat@eafit.edu.co
 Maria Alejandra Martinez mamartineg@eafit.edu.co
 #
-# Profesor: nombre, email-eafit
+# Profesor: 
+Edwin Montoya emontoya@eafit.edu.co
 #
 
 # Diseño e Implementación de una base de datos para un Sistemas de Gestión de Cursos
@@ -42,11 +43,11 @@ Salir del Curso y regresar a Listar Cursos
 
 Reportes – Solo Administradores 
 
-Listar todos los cursos por algun mecanismo de filtrado (todos o como codcurso, codprofesor, etc, o por rango de fechas, o por algun otro criterio que considere) 
+Listar todos los cursos filtrados por fecha de inicio
 
-Ver la información de un curso: Detalles de un curso, su profesor y alumnos (no los materiales, tareas, foros) 
+Ver la información de un curso: Detalles de un curso, su profesor y alumnos 
 
-Listar usuarios por algun mecanismo de filtrado (todos, o por role, id, etc) 
+Listar usuarios filtrados por rol
 
 
 
