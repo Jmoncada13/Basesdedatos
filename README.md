@@ -1,69 +1,62 @@
-# info de la materia: <codigo-mat> <nombre-mat>
+# info de la materia: <ST0246> <Base-de-Datos>
 #
 # Estudiante(s): 
-Juan Sebastián Moncada jsmoncadat@eafit.edu.co
-Maria Alejandra Martinez mamartineg@eafit.edu.co
+# Juan Sebastian Moncada, jsmoncadat@eafit.edu.co
+# María Alejandra Martínez, mamaartineg@eafit.edu.co
 #
-# Profesor: 
-Edwin Montoya emontoya@eafit.edu.co
-#
+# Profesor: Edwin Nelson Montoya, emontoya@eafit.edu.co
 
-# Diseño e Implementación de una base de datos para un Sistemas de Gestión de Cursos
-# 
-##  Que aspectos cumplió o desarrolló de la actividad propuesta por el profesor (requerimientos funcionales y no funcionales)
-Login/logout, autenticar el usuario con su username y password, el cual seguramente estará en la tabla Usuarios.   
+# Diseño e Implementación de una base de datos para un Sistema de Gestión de Cursos (Nodo LMS)
 
-Opciones Para un Administrador:   
+<Este proyecto consiste en el diseño, modelado y desarrollo de una base de datos relacional para una plataforma de gestión de cursos en línea tipo LMS, llamada Nodo. La solución incluye desde el modelo entidad-relación hasta una aplicación web funcional desarrollada con Django y MySQL.>
 
-Matricular Usuarios a un curso.   
+## 1. ¿Qué aspectos se cumplieron o desarrollaron de la actividad propuesta por el profesor?
 
-Asignar un profesor a un curso.  
+**Autenticación:**
+- Login/Logout de usuarios usando email y contraseña.
 
-Más todas las opciones como profesor y Alumno.  
+**Funcionalidades para Administrador:**
+- Matricular estudiantes en cursos.
+- Asignar profesores a cursos.
+- Ver cursos disponibles
+- Reportes:
+  - Listar cursos filtrados por fecha de inicio.
+  - Ver detalles de un curso (profesor y estudiantes).
+  - Listar usuarios filtrados por rol.
 
-Opciones Para profesor y alumno. 
+**Funcionalidades para Profesor y Estudiante:**
+- Listar los cursos asignados.
+- Ingresar a un curso y:
+  - Listar alumnos del curso.
+  - Listar materiales del curso.
+  - Listar tareas del curso.
+  - Listar y participar en foros.
+- **Funciones exclusivas del profesor:**
+  - Crear y subir materiales (simulados con URLs).
+  - Crear foros.
+- Salir de un curso y regresar al listado general.
+- **Funciones exclusivas del estudiante:**
+ - Entregar tareas
 
-Listar sus cursos 
+---
 
-Ingresar a un curso y poder hacer: 
+## 2. ¿Qué aspectos no se cumplieron?
 
-Listar Alumnos 
+- No se implementó la funcionalidad de envío de notificaciones al correo.
+- No se gestionaron archivos reales (se simulan nombres).
+- No se desplegó la aplicación en un servidor remoto o en AWS.
 
-Listar Materiales  
+---
 
-Foros (enviar mensajes, responder mensajes) 
+## 3. Descripción del ambiente de desarrollo y técnico
 
-Tareas 
-
-Subir materiales (solo profesor, será simulado URLs ficticias) 
-
-Crear Foro (solo profesor) 
-
-Salir del Curso y regresar a Listar Cursos 
-
-Reportes – Solo Administradores 
-
-Listar todos los cursos filtrados por fecha de inicio
-
-Ver la información de un curso: Detalles de un curso, su profesor y alumnos 
-
-Listar usuarios filtrados por rol
-
-
-
-
-#  Descripción del ambiente de desarrollo y técnico: lenguaje de programación, librerias, paquetes, etc, con sus numeros de versiones.
-asgiref==3.8.1
-Django==5.2.1
-djangorestframework==3.16.0
-mysqlclient==2.2.7
-python-decouple==3.8
-sqlparse==0.5.3
-tzdata==2025.2
+**Lenguaje principal:**  
 Python 3.13.3
 
-# referencias:
-<debemos siempre reconocer los créditos de partes del código que reutilizaremos, así como referencias a youtube, o referencias bibliográficas utilizadas para desarrollar el proyecto o la actividad>
-## sitio1-url 
-## sitio2-url
-## url de donde tomo info para desarrollar este proyecto
+**Framework y herramientas utilizadas:**  
+- Django 5.2.1  
+- Django REST Framework 3.16.0  
+- MySQL 8.0  
+- Bootstrap 5.3 (para el frontend básico)
+
+**Librerías y dependencias (versión exacta):**
