@@ -6,15 +6,12 @@ Maria Alejandra Martinez mamartineg@eafit.edu.co
 #
 # Profesor: nombre, email-eafit
 #
-# <para borrar: EL OBJETIVO DE ESTA DOCUMENTACÍON ES QUE CUALQUIER LECTOR CON EL REPO, EN ESPECIAL EL PROFESOR, ENTIENDA EL ALCANCE DE LO DESARROLLADO Y QUE PUEDA REPRODUCIR SIN EL ESTUDIANTE EL AMBIENTE DE DESARROLLO Y EJECUTAR Y USAR LA APLICACIÓN SIN PROBLEMAS>
 
-# <para borrar: renombre este archivo a README.md cuando lo vaya a usar en un caso específico>
-
-# nombre del proyecto, lab o actividad
-#
+# Diseño e Implementación de una base de datos para un Sistemas de Gestión de Cursos
+# 
 # 1. breve descripción de la actividad
-#
-<texto descriptivo>
+# 
+<aaaaaaaaaa>
 ## 1.1. Que aspectos cumplió o desarrolló de la actividad propuesta por el profesor (requerimientos funcionales y no funcionales)
 
 ## 1.2. Que aspectos NO cumplió o desarrolló de la actividad propuesta por el profesor (requerimientos funcionales y no funcionales)
