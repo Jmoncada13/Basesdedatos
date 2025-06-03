@@ -9,7 +9,7 @@ Maria Alejandra Martinez mamartineg@eafit.edu.co
 
 # Diseño e Implementación de una base de datos para un Sistemas de Gestión de Cursos
 # 
-## 1.1. Que aspectos cumplió o desarrolló de la actividad propuesta por el profesor (requerimientos funcionales y no funcionales)
+##  Que aspectos cumplió o desarrolló de la actividad propuesta por el profesor (requerimientos funcionales y no funcionales)
 Login/logout, autenticar el usuario con su username y password, el cual seguramente estará en la tabla Usuarios.   
 
 Opciones Para un Administrador:   
@@ -48,12 +48,10 @@ Ver la información de un curso: Detalles de un curso, su profesor y alumnos (no
 
 Listar usuarios por algun mecanismo de filtrado (todos, o por role, id, etc) 
 
-## 1.2. Que aspectos NO cumplió o desarrolló de la actividad propuesta por el profesor (requerimientos funcionales y no funcionales)
 
 
 
-
-# 3. Descripción del ambiente de desarrollo y técnico: lenguaje de programación, librerias, paquetes, etc, con sus numeros de versiones.
+#  Descripción del ambiente de desarrollo y técnico: lenguaje de programación, librerias, paquetes, etc, con sus numeros de versiones.
 asgiref==3.8.1
 Django==5.2.1
 djangorestframework==3.16.0
