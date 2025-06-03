@@ -9,9 +9,6 @@ Maria Alejandra Martinez mamartineg@eafit.edu.co
 
 # Diseño e Implementación de una base de datos para un Sistemas de Gestión de Cursos
 # 
-# 1. breve descripción de la actividad
-# 
-<aaaaaaaaaa>
 ## 1.1. Que aspectos cumplió o desarrolló de la actividad propuesta por el profesor (requerimientos funcionales y no funcionales)
 
 ## 1.2. Que aspectos NO cumplió o desarrolló de la actividad propuesta por el profesor (requerimientos funcionales y no funcionales)
