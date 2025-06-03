@@ -191,7 +191,6 @@ def reporte_cursos_fechas(request):
         fecha_fin = request.POST.get('fecha_fin')
         
         if fecha_inicio and fecha_fin:
-            # Filtrar cursos que empiecen en el rango de fechas seleccionado
             cursos = Curso.objects.filter(
                 fecha_inicio__gte=fecha_inicio,
                 fecha_inicio__lte=fecha_fin
@@ -211,15 +210,12 @@ def reporte_usuarios_rol(request):
     usuarios = []
     rol_seleccionado = None
     total_usuarios = 0
-    
-    # Obtener las opciones de roles del modelo Usuario
     roles_disponibles = Usuario.ROL_CHOICES
     
     if request.method == 'POST':
         rol_seleccionado = request.POST.get('rol')
         
         if rol_seleccionado:
-            # Filtrar usuarios por el rol seleccionado
             usuarios = Usuario.objects.filter(rol=rol_seleccionado).order_by('nombre_completo')
             total_usuarios = usuarios.count()
     
