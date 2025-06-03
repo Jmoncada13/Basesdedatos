@@ -29,10 +29,10 @@
     <div class="container mt-5">
         <h2 class="mb-4">Panel del Curso: {{ curso.nombre }}</h2>
         <div class="list-group">
-            <a href="{% url 'listar_alumnos' curso.id_curso %}" class="list-group-item list-group-item-action"> Listar Alumnos</a>
-            <a href="{% url 'listar_materiales' curso.id_curso %}" class="list-group-item list-group-item-action">Ver Materiales</a>
-            <a href="{% url 'ver_foros' curso.id_curso %}" class="list-group-item list-group-item-action">Foros del Curso</a>
-            <a href="{% url 'ver_tareas' curso.id_curso %}" class="list-group-item list-group-item-action">Ver Tareas</a>
+            <a href="{% url 'listar_alumnos_profesor' curso.id_curso %}" class="list-group-item list-group-item-action"> Listar Alumnos</a>
+            <a href="{% url 'listar_materiales_profesor' curso.id_curso %}" class="list-group-item list-group-item-action">Ver Materiales</a>
+            <a href="{% url 'ver_foros_profesor' curso.id_curso %}" class="list-group-item list-group-item-action">Foros del Curso</a>
+            <a href="{% url 'ver_tareas_profesor' curso.id_curso %}" class="list-group-item list-group-item-action">Ver Tareas</a>
         </div>
         <a href="{% url 'listar_cursos_profesor' %}" class="btn btn-secondary mt-3">Volver a cursos</a>
     </div>

@@ -40,7 +40,7 @@
                             <div>
                                 <p>{{ foro.nombre }} : {{foro.descripcion}}</p>
                             </div>
-                            <a href="{% url 'ver_mensajes_foro' foro.id_foro %}" class="btn btn-outline-primary btn-sm">Ver mensajes</a>
+                            <a href="{% url 'ver_mensajes_foro_profesor' foro.id_foro %}" class="btn btn-outline-primary btn-sm">Ver mensajes</a>
                         </li>
                     {% endfor %}
                     <a href="{% url 'crear_foro' curso.id_curso %}" class="btn btn-outline-primary">Crear foro</a>
